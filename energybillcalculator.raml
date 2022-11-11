@@ -33,7 +33,7 @@ traits:
     put:
       body:
         application/json:
-          example: !include /Example/UserExample.raml
+          example: !include /examples/UserExample.raml
 
       responses:
         201:
@@ -49,7 +49,7 @@ traits:
         200:
           body:
             application/json:
-              example: !include /Example/UserExample.raml
+              example: !include /examples/UserExample.raml
 
 
   /searchUserByUserId:
@@ -58,7 +58,7 @@ traits:
         200:
           body:
             application/json:
-              example: !include /Example/UserExample.raml
+              example: !include /examples/UserExample.raml
 
   /loginU/{userName}/{pass}:
     get:
@@ -66,14 +66,14 @@ traits:
         200:
           body:
             application/json:
-             example: !include /Example/UserExample.raml
+             example: !include /examples/UserExample.raml
   /forgotPass/{userName}:
     get:
       responses:
         200:
           body:
             application/json:
-              example: !include /Example/UserExample.raml        
+              example: !include /examples/UserExample.raml        
 /Customer:
   /newCustomer:
     post:
