@@ -152,7 +152,6 @@ traits:
         200:
           body:
             application/json:
-              type: conn[]
               example: !include examples/connectionArrayExample.raml 
   /activeConnections/{district}:
     get:
@@ -183,7 +182,6 @@ traits:
         200:
           body:
             application/json:
-              type: conn[]
               example: !include examples/connectionArrayExample.raml     
   /inactiveConnections/{district}:
     get:
