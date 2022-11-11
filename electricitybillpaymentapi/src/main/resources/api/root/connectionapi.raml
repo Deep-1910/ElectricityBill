@@ -1,0 +1,152 @@
+#%RAML 1.0
+title: ConnectionAPI
+
+types: 
+  connNoId: !include dataType/connectionDataTypeNoID.raml
+  conn: !include dataType/connectionDataType.raml
+
+traits:
+  client-id-required:
+    headers:
+      client_id:
+        type: string
+      client_secret:
+        type: string
+    responses:
+      401:
+        description: Unauthorized, The client_id or client_secret are not valid or the client does not have access.
+      429:
+        description: The client used all of its request quota for the current period.
+      500:
+        description: An error occurred, see the specific message (Only if it is a WSDL endpoint).
+      503:
+        description: Contracts Information Unreachable.  
+
+/connection:
+  is: [client-id-required]
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: conn
+            example: !include examples/connectionExample.raml 
+
+  /newConnection:        
+    post:
+      is: [client-id-required]
+      body:
+        application/json:
+          # type: connNoId
+          example: !include examples/connectionExample.raml
+      responses:
+        201:
+          body:
+            application/json:
+              example:
+                message: New Connection added.
+
+  /modifyAddress:
+    put:
+      is: [client-id-required]
+      body:
+        application/json:
+          # type: conn
+          example: !include examples/connectionExample.raml
+      responses:
+        201:
+          body:
+            application/json:
+              example:
+                message: Connection address updated.    
+                
+
+  /custByCNum/{consumerNumber}:
+    get:
+      is: [client-id-required]
+      responses:
+        200:
+          body:
+            application/json:
+              # type: ############
+              example: !include examples/CustomerExample.raml
+
+  /connByCNum/{consumerNumber}:
+    get:
+      is: [client-id-required]
+      responses:
+        200:
+          body:
+            application/json:
+              type: conn
+              example: !include examples/connectionExample.raml
+
+
+  /activeConnections/{village}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: conn[]
+              example: !include examples/connectionArrayExample.raml 
+  /activeConnections/{district}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: conn[]
+              example: !include examples/connectionArrayExample.raml     
+  /activeConnections/{state}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: conn[]
+              example: !include examples/connectionArrayExample.raml     
+  /activeConnections/{pincode}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: conn[]
+              example: !include examples/connectionArrayExample.raml      
+
+  
+  /inactiveConnections/{village}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: conn[]
+              example: !include examples/connectionArrayExample.raml     
+  /inactiveConnections/{district}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: conn[]
+              example: !include examples/connectionArrayExample.raml     
+  /inactiveConnections/{state}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: conn[]
+              example: !include examples/connectionArrayExample.raml     
+  /inactiveConnections/{pincode}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: conn[]
+              example: !include examples/connectionArrayExample.raml      
+
+

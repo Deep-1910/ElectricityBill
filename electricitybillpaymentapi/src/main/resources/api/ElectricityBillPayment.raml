@@ -1,0 +1,415 @@
+#%RAML 1.0
+title: EnergyBillCalculator
+traits:
+  client-id-required:
+    headers:
+      client_id:
+        type: string
+      client_secret:
+        type: string
+    responses:
+      401:
+        description: Unauthorized, The client_id or client_secret are not valid or the client does not have access.
+      429:
+        description: The client used all of its request quota for the current period.
+      500:
+        description: An error occurred, see the specific message (Only if it is a WSDL endpoint).
+      503:
+        description: Contracts Information Unreachable.
+/User:
+  /Register:
+    post:
+      body:
+        application/json:
+          example: !include /examples/UserExample.raml
+
+      responses:
+        201:
+          body:
+            application/json:
+              example:
+                message: User Added Successfully
+  /UpdatePass/{userName}/{oldPass}/{newPass}:
+    put:
+      body:
+        application/json:
+          example: !include /examples/UserExample.raml
+
+      responses:
+        201:
+          body:
+            application/json:
+              example:
+                message: Password Updated 
+
+
+  /searchUserByUserName:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include /examples/UserExample.raml
+
+
+  /searchUserByUserId:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include /examples/UserExample.raml
+
+  /loginU/{userName}/{pass}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+             example: !include /examples/UserExample.raml
+  /forgotPass/{userName}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include /examples/UserExample.raml        
+/Customer:
+  /newCustomer:
+    post:
+      body:
+        application/json:
+          example: !include examples/CustomerNoIdExample.raml
+
+      responses:
+        201:
+          body:
+            application/json:
+              example:
+                message: Customer Added Successfully
+
+  /editCustomer:
+    put:
+      body:
+        application/json:
+          example: !include examples/CustomerNoIdExample.raml
+
+      responses:
+        201:
+          body:
+            application/json:
+              example:
+                message: Customer Updated Successfully
+
+  /getCustById/{id}:
+    is: [client-id-required]
+    get:   
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include examples/CustomerExample.raml
+
+  /getCustByEmail/{mail}:
+    is: [client-id-required]
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include examples/CustomerExample.raml
+
+  /getCustByAdhar/{adhar}:
+    is: [client-id-required]
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include examples/CustomerExample.raml
+
+  /getCustByName/{fname}:
+    is: [client-id-required]
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include examples/CustomerExample.raml
+
+  /getCustByMobile/{mobile}:
+    is: [client-id-required]
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include examples/CustomerExample.raml
+  
+/connection:
+  is: [client-id-required]
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/connectionExample.raml 
+
+  /newConnection:        
+    post:
+      is: [client-id-required]
+      body:
+        application/json:
+          # type: connNoId
+          example: !include examples/connectionExample.raml
+      responses:
+        201:
+          body:
+            application/json:
+              example:
+                message: New Connection added.
+
+  /modifyAddress:
+    put:
+      is: [client-id-required]
+      body:
+        application/json:
+          # type: conn
+          example: !include examples/connectionExample.raml
+      responses:
+        201:
+          body:
+            application/json:
+              example:
+                message: Connection address updated.    
+                
+
+  /custByCNum/{consumerNumber}:
+    get:
+      is: [client-id-required]
+      responses:
+        200:
+          body:
+            application/json:
+              # type: ############
+              example: !include examples/CustomerExample.raml
+
+  /connByCNum/{consumerNumber}:
+    get:
+      is: [client-id-required]
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include examples/connectionExample.raml
+
+
+  /activeConnections/{village}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include examples/connectionArrayExample.raml 
+  /activeConnections/{district}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include examples/connectionArrayExample.raml     
+  /activeConnections/{state}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include examples/connectionArrayExample.raml     
+  /activeConnections/{pincode}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include examples/connectionArrayExample.raml      
+
+  
+  /inactiveConnections/{village}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include examples/connectionArrayExample.raml     
+  /inactiveConnections/{district}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include examples/connectionArrayExample.raml     
+  /inactiveConnections/{state}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include examples/connectionArrayExample.raml     
+  /inactiveConnections/{pincode}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include examples/connectionArrayExample.raml      
+/Reading:
+  /selfSubmitReading/{consumerNumber}:
+  post:
+    body:
+      application/json:
+         example: !include /examples/submitexample.raml
+    responses:
+      200:
+       body:
+        application/json:
+          example:
+            message: Reading submitted successfully.
+/findMeterReadingByConsumerNumberAndBillDate:
+  get:
+    queryParameters:
+      consumerNumber:
+        required: true
+      billDate:
+        required: true
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              !include examples/consandbilldateexample.raml
+/findMeterReadingByConsumerNumber:
+  get:
+    queryParameters:
+      consumerNumber:
+        required: true
+      billDate:
+        required: true
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              !include examples/consandbilldateexample.raml
+/Bill:
+  /BillbyConsumerNumber/{cnum}:
+    is: [client-id-required]
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include examples/billapi.raml
+    
+  /BillbyEmail/{email}:
+    is: [client-id-required]
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include examples/billapi.raml
+  
+      
+  /BillbyMobileNumber/{mNum}:
+    is: [client-id-required]
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include examples/billapi.raml
+
+  /BillBetweenDates/{d1}/{d2}:
+    is: [client-id-required]
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include examples/bill2api.raml
+
+  /CalculateEnergyBill/{Reading}:
+    is: [client-id-required]
+    get:
+      queryParameters:
+        conncetionType:
+          required: false
+          enum:
+            - Agriculture
+            - Industrial
+            - Non-Industrial        
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include examples/energyBillCalulator.raml
+  /EmailBillToCustomer/{email}:
+    is: [client-id-required]
+    get:
+      queryParameters:
+        ConsumerNumber:
+          required: true
+        conncetionType:
+          required: false
+          enum:
+            - Agriculture
+            - Industrial
+            - Non-Industrial        
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: email has been sent
+/Payment:
+  /viewHistoricalPayment/{consumerNumber}:
+  get:
+
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include /examples/PaymentExample.raml
+
+/sendEmailOnPayment/{consumerNumber}:
+  post:
+    queryParameters:
+      email:
+        required: false
+      
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              message: "Email sent successfully"
+
+
+/payBill/{consumerNumber}:
+  post:
+    queryParameters:
+      payMode:
+        required: true
+        enum:
+          - CREDIT
+          - DEBIT
+          - WALLET
+          - NETBANKING
+
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              message : "Bill paid!!"
+      

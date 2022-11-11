@@ -1,0 +1,74 @@
+#%RAML 1.0
+title: User 
+
+types:
+  userName: !include /DataType/UserDataType.raml
+  userId: !include /DataType/UserDataType.raml
+
+/users:
+  /Register:
+    post:
+      body:
+        application/json:
+          example: !include /Example/UserExample.raml
+
+      responses:
+        201:
+          body:
+            application/json:
+              example:
+                message: User Added Successfully
+  /UpdatePass/{userName}/{oldPass}/{newPass}:
+    put:
+      body:
+        application/json:
+          example: !include /Example/UserExample.raml
+
+      responses:
+        201:
+          body:
+            application/json:
+              example:
+                message: Password Updated 
+
+
+  /searchUserByUserName:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include /Example/UserExample.raml
+
+
+  /searchUserByUserId:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include /Example/UserExample.raml
+
+  /loginU/{userName}/{pass}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+             example: !include /Example/UserExample.raml
+  /forgotPass/{userName}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include /Example/UserExample.raml
+
+
+    
+  
+
+
+
+    
+   
