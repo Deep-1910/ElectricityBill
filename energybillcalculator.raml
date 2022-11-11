@@ -1,5 +1,21 @@
 #%RAML 1.0
 title: EnergyBillCalculator
+traits:
+  client-id-required:
+    headers:
+      client_id:
+        type: string
+      client_secret:
+        type: string
+    responses:
+      401:
+        description: Unauthorized, The client_id or client_secret are not valid or the client does not have access.
+      429:
+        description: The client used all of its request quota for the current period.
+      500:
+        description: An error occurred, see the specific message (Only if it is a WSDL endpoint).
+      503:
+        description: Contracts Information Unreachable.
 /Customer:
   /newCustomer:
     post:
@@ -79,7 +95,6 @@ title: EnergyBillCalculator
       200:
         body:
           application/json:
-            type: conn
             example: !include examples/connectionExample.raml 
 
   /newConnection:        
@@ -128,7 +143,6 @@ title: EnergyBillCalculator
         200:
           body:
             application/json:
-              type: conn
               example: !include examples/connectionExample.raml
 
 
@@ -153,7 +167,6 @@ title: EnergyBillCalculator
         200:
           body:
             application/json:
-              type: conn[]
               example: !include examples/connectionArrayExample.raml     
   /activeConnections/{pincode}:
     get:
@@ -161,7 +174,6 @@ title: EnergyBillCalculator
         200:
           body:
             application/json:
-              type: conn[]
               example: !include examples/connectionArrayExample.raml      
 
   
@@ -193,7 +205,6 @@ title: EnergyBillCalculator
         200:
           body:
             application/json:
-              type: conn[]
               example: !include examples/connectionArrayExample.raml      
 
 
@@ -270,4 +281,3 @@ title: EnergyBillCalculator
             example:
               message: email has been sent
 /Payment:
-  
