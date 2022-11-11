@@ -16,6 +16,7 @@ traits:
         description: An error occurred, see the specific message (Only if it is a WSDL endpoint).
       503:
         description: Contracts Information Unreachable.
+/User:        
 /Customer:
   /newCustomer:
     post:
@@ -204,8 +205,6 @@ traits:
           body:
             application/json:
               example: !include examples/connectionArrayExample.raml      
-
-
 /Reading:
 /Bill:
   /BillbyConsumerNumber/{cnum}:
