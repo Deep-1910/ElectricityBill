@@ -199,4 +199,74 @@ title: EnergyBillCalculator
 
 /Reading:
 /Bill:
+  /BillbyConsumerNumber/{cnum}:
+  is: [client-id-required]
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/billapi.raml
+    
+/BillbyEmail/{email}:
+  is: [client-id-required]
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/billapi.raml
+ 
+     
+/BillbyMobileNumber/{mNum}:
+  is: [client-id-required]
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/billapi.raml
+
+/BillBetweenDates/{d1}/{d2}:
+  is: [client-id-required]
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/bill2api.raml
+
+/CalculateEnergyBill/{Reading}:
+  is: [client-id-required]
+  get:
+    queryParameters:
+      conncetionType:
+        required: false
+        enum:
+          - Agriculture
+          - Industrial
+          - Non-Industrial        
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/energyBillCalulator.raml
+/EmailBillToCustomer/{email}:
+  is: [client-id-required]
+  get:
+    queryParameters:
+      ConsumerNumber:
+        required: true
+      conncetionType:
+        required: false
+        enum:
+          - Agriculture
+          - Industrial
+          - Non-Industrial        
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              message: email has been sent
 /Payment:
