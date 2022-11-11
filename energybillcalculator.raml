@@ -180,7 +180,6 @@ title: EnergyBillCalculator
         200:
           body:
             application/json:
-              type: conn[]
               example: !include examples/connectionArrayExample.raml     
   /inactiveConnections/{state}:
     get:
@@ -188,7 +187,6 @@ title: EnergyBillCalculator
         200:
           body:
             application/json:
-              type: conn[]
               example: !include examples/connectionArrayExample.raml     
   /inactiveConnections/{pincode}:
     get:
