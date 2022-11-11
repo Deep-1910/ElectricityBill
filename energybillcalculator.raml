@@ -279,3 +279,44 @@ traits:
             example:
               message: email has been sent
 /Payment:
+  /viewHistoricalPayment/{consumerNumber}:
+  get:
+
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include /examples/PaymentExample.raml
+
+/sendEmailOnPayment/{consumerNumber}:
+  post:
+    queryParameters:
+      email:
+        required: false
+      
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              message: "Email sent successfully"
+
+
+/payBill/{consumerNumber}:
+  post:
+    queryParameters:
+      payMode:
+        required: true
+        enum:
+          - CREDIT
+          - DEBIT
+          - WALLET
+          - NETBANKING
+
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              message : "Bill paid!!"
+      
