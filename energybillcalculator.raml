@@ -73,7 +73,134 @@ title: EnergyBillCalculator
               example: !include examples/CustomerExample.raml
   
 /Conncetion:
+  /connection:
+  is: [client-id-required]
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: conn
+            example: !include examples/connectionExample.raml 
+
+  /newConnection:        
+    post:
+      is: [client-id-required]
+      body:
+        application/json:
+          # type: connNoId
+          example: !include examples/connectionExample.raml
+      responses:
+        201:
+          body:
+            application/json:
+              example:
+                message: New Connection added.
+
+  /modifyAddress:
+    put:
+      is: [client-id-required]
+      body:
+        application/json:
+          # type: conn
+          example: !include examples/connectionExample.raml
+      responses:
+        201:
+          body:
+            application/json:
+              example:
+                message: Connection address updated.    
+                
+
+  /custByCNum/{consumerNumber}:
+    get:
+      is: [client-id-required]
+      responses:
+        200:
+          body:
+            application/json:
+              # type: ############
+              example: !include examples/CustomerExample.raml
+
+  /connByCNum/{consumerNumber}:
+    get:
+      is: [client-id-required]
+      responses:
+        200:
+          body:
+            application/json:
+              type: conn
+              example: !include examples/connectionExample.raml
+
+
+  /activeConnections/{village}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: conn[]
+              example: !include examples/connectionArrayExample.raml 
+  /activeConnections/{district}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: conn[]
+              example: !include examples/connectionArrayExample.raml     
+  /activeConnections/{state}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: conn[]
+              example: !include examples/connectionArrayExample.raml     
+  /activeConnections/{pincode}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: conn[]
+              example: !include examples/connectionArrayExample.raml      
+
   
+  /inactiveConnections/{village}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: conn[]
+              example: !include examples/connectionArrayExample.raml     
+  /inactiveConnections/{district}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: conn[]
+              example: !include examples/connectionArrayExample.raml     
+  /inactiveConnections/{state}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: conn[]
+              example: !include examples/connectionArrayExample.raml     
+  /inactiveConnections/{pincode}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: conn[]
+              example: !include examples/connectionArrayExample.raml      
+
+
 /Reading:
 /Bill:
 /Payment:
