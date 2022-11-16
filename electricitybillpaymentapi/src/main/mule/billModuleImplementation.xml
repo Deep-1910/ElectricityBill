@@ -7,6 +7,7 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
 	<flow name="billModuleImplementationFlow" doc:id="c05440e2-ca9d-4517-a7d3-3d83e9937619" >
-		<http:listener doc:name="Listener" doc:id="67684819-f88c-40ac-97bf-48589cf40696" config-ref="ElectricityBillPayment-httpListenerConfig"/>
+		<http:listener doc:name="Listener" doc:id="67684819-f88c-40ac-97bf-48589cf40696" config-ref="ElectricityBillPayment-httpListenerConfig" path="/customer"/>
+		<logger level="INFO" doc:name="Logger" doc:id="b9b35799-4543-4205-aeba-4cf581ed8dc4" />
 	</flow>
 </mule>
