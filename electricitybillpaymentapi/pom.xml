@@ -58,6 +58,18 @@
 			<version>1.13.6</version>
 			<classifier>mule-plugin</classifier>
 		</dependency>
+		<dependency>
+			<groupId>552c9f5a-ee9f-4705-8ce2-37e626900967</groupId>
+			<artifactId>mule-plugin-billmodule</artifactId>
+			<version>2.0.0</version>
+			<classifier>mule-plugin</classifier>
+		</dependency>
+		<dependency>
+			<groupId>552c9f5a-ee9f-4705-8ce2-37e626900967</groupId>
+			<artifactId>mule-plugin-energybillcalculator</artifactId>
+			<version>1.0.3</version>
+			<classifier>mule-plugin</classifier>
+		</dependency>
 	</dependencies>
 
 	<repositories>
